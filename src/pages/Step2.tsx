@@ -33,11 +33,11 @@ export const Step2 = () => {
   const dispatch = useDispatch()
   const styles = useStyle()
   const [value, setValue] = useState('')
-  const handleChange = (event) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value)
   }
 
-  const submitHandler = (e) => {
+  const submitHandler = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault()
     dispatch(setAge(value))
     history.push('/step3')
