@@ -1,6 +1,6 @@
 const SET_INFO = "SET_INFO"
 
-interface State {
+export interface State {
   firstName: string
   lastName: string
   city: string
