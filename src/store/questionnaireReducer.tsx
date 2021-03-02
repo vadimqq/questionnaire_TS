@@ -4,7 +4,7 @@ const SET_LANGUAGES = "SET_LANGUAGES"
 
 interface State {
   age: string
-  languages: string[]
+  languages: any[]
 }
 
 interface Action {
@@ -36,4 +36,4 @@ export default function questionnaireReducer (state = initialState, action: Acti
 
 export const setAge = (age: string) => ({ type: SET_AGE, payload: age })
 
-export const setLenguages = (languages: string[]) => ({ type: SET_LANGUAGES, payload: languages })
+export const setLenguages = (languages: any[]) => ({ type: SET_LANGUAGES, payload: languages })
