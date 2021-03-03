@@ -111,6 +111,10 @@ export const Step1 = () => {
             <option value="Ульяновск">Ульяновск</option>
             <option value="Москва">Москва</option>
             <option value="Самра">Самара</option>
+            <option value="Москва">Пермь</option>
+            <option value="Самра">Казань</option>
+            <option value="Москва">Владивосток</option>
+            <option value="Самра">Санкт-Петербург</option>
           </Select>
         </FormControl>
         <SubmitButton>Следующий шаг</SubmitButton>
