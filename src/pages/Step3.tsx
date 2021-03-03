@@ -12,6 +12,11 @@ import Alert from '@material-ui/lab/Alert'
 
 import { setLenguages } from '../store/questionnaireReducer'
 
+interface Language {
+  name: string
+  checked: boolean
+}
+
 const useStyle = makeStyles((theme) => ({
   root: {
     marginTop: theme.spacing(4),
@@ -31,20 +36,49 @@ export const Step3 = () => {
   const history = useHistory()
   const styles = useStyle()
   const dispatch = useDispatch()
-  const [value, setValue] = useState({
-    Php: false,
-    Java: false,
-    Phyton: false,
-    JavaScript: false,
-    Ruby: false,
-    C: false,
-    Swift: false
-  })
+  const [value, setValue] = useState([
+    {
+      name: 'Php',
+      checked: false
+    },
+    {
+      name: 'Java',
+      checked: false
+    },
+    {
+      name: 'Phyton',
+      checked: false
+    },
+    {
+      name: 'JavaScript',
+      checked: false
+    },
+    {
+      name: 'Ruby',
+      checked: false
+    },
+    {
+      name: 'C',
+      checked: false
+    },
+    {
+      name: 'Swift',
+      checked: false
+    }
+  ])
   const [alert, setAlert] = useState(false)
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setAlert(false)
-    setValue({ ...value, [event.target.name]: event.target.checked })
+    const newValue = value.map(item => {
+      if (item.name === event.target.name) {
+        item.checked = event.target.checked
+        return item
+      } else {
+        return item
+      }
+    })
+    setValue(newValue)
   }
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
@@ -58,18 +92,15 @@ export const Step3 = () => {
   }
 
   const createResult = (value: any) => {
-    const array = Object.keys(value)
-    const result = array.map((item) => {
-      if (value[item] === true) {
-        return item
+    const result = value.map((item: Language) => {
+      if (item.checked === true) {
+        return item.name
       } else {
-        return false
+        return null
       }
-    }).filter(item => { return item !== false })
+    }).filter((item: string) => { return item !== null })
     return result
   }
-
-  const { Php, Java, Phyton, JavaScript, C, Ruby, Swift } = value
 
   return (
     <Container
@@ -83,36 +114,18 @@ export const Step3 = () => {
         noValidate
         className={ styles.form }
       >
-        <FormControlLabel
-          control={<Checkbox checked={Php} onChange={handleChange} name="Php" />}
-          label="Php"
-          color="primary"
-        />
-        <FormControlLabel
-          control={<Checkbox checked={Java} onChange={handleChange} name="Java" />}
-          label="Java"
-        />
-        <FormControlLabel
-          control={<Checkbox checked={Phyton} onChange={handleChange} name="Phyton" />}
-          label="Phyton"
-        />
-        <FormControlLabel
-          control={<Checkbox checked={JavaScript} onChange={handleChange} name="JavaScript" />}
-          label="JavaScript"
-        />
-        <FormControlLabel
-          control={<Checkbox checked={C} onChange={handleChange} name="C" />}
-          label="C"
-        />
-        <FormControlLabel
-          control={<Checkbox checked={Ruby} onChange={handleChange} name="Ruby" />}
-          label="Ruby"
-        />
-        <FormControlLabel
-          control={<Checkbox checked={Swift} onChange={handleChange} name="Swift" />}
-          label="Swift"
-        />
-        {alert == true && <Alert severity="error">Необходимо выбрать хотя бы один пункт!</Alert>}
+        {value.map((item, id) => {
+          return (
+            <FormControlLabel
+              control={<Checkbox checked={ item.checked } onChange={handleChange} name={ item.name } />}
+              label={ item.name }
+              color="primary"
+              key={ id }
+            />
+          )
+        })}
+        
+        {alert === true && <Alert severity="error">Необходимо выбрать хотя бы один пункт!</Alert>}
         <SubmitButton>Следующий шаг</SubmitButton>
       </form>
     </Container>
