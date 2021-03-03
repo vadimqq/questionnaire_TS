@@ -20,7 +20,7 @@ export const Header = () => {
       component='h1'
       variant='h5'
     >
-      Опросник по технологиям разработки
+      Опрос по технологиям разработки
     </Typography>
   )
 }
