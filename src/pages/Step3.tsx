@@ -7,8 +7,9 @@ import { Container } from '@material-ui/core'
 import { SubmitButton } from '../components/Buttton'
 import Checkbox from '@material-ui/core/Checkbox'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
-import FormLabel from '@material-ui/core/FormLabel'
 import Typography from '@material-ui/core/Typography'
+import Alert from '@material-ui/lab/Alert'
+
 import { setLenguages } from '../store/questionnaireReducer'
 
 const useStyle = makeStyles((theme) => ({
@@ -33,18 +34,27 @@ export const Step3 = () => {
   const [value, setValue] = useState({
     Php: false,
     Java: false,
-    CSharp: false,
-    JavaScript: false
+    Phyton: false,
+    JavaScript: false,
+    Ruby: false,
+    C: false,
+    Swift: false
   })
+  const [alert, setAlert] = useState(false)
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue({ ...value, [event.target.name]: event.target.checked });
+    setAlert(false)
+    setValue({ ...value, [event.target.name]: event.target.checked })
   }
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    dispatch(setLenguages(createResult(value)))
-    history.push('/result')
+    if (createResult(value).length > 0) {
+      dispatch(setLenguages(createResult(value)))
+      history.push('/result')
+    } else {
+      setAlert(true)
+    }
   }
 
   const createResult = (value: any) => {
@@ -59,7 +69,7 @@ export const Step3 = () => {
     return result
   }
 
-  const { Php, Java, CSharp, JavaScript } = value
+  const { Php, Java, Phyton, JavaScript, C, Ruby, Swift } = value
 
   return (
     <Container
@@ -73,24 +83,36 @@ export const Step3 = () => {
         noValidate
         className={ styles.form }
       >
-        <FormLabel component="legend">кек</FormLabel>
-          <FormControlLabel
-            control={<Checkbox checked={Php} onChange={handleChange} name="Php" />}
-            label="Php"
-            color="primary"
-          />
-          <FormControlLabel
-            control={<Checkbox checked={Java} onChange={handleChange} name="Java" />}
-            label="Java"
-          />
-          <FormControlLabel
-            control={<Checkbox checked={CSharp} onChange={handleChange} name="CSharp" />}
-            label="C#"
-          />
-          <FormControlLabel
-            control={<Checkbox checked={JavaScript} onChange={handleChange} name="JavaScript" />}
-            label="JavaScript"
-          />
+        <FormControlLabel
+          control={<Checkbox checked={Php} onChange={handleChange} name="Php" />}
+          label="Php"
+          color="primary"
+        />
+        <FormControlLabel
+          control={<Checkbox checked={Java} onChange={handleChange} name="Java" />}
+          label="Java"
+        />
+        <FormControlLabel
+          control={<Checkbox checked={Phyton} onChange={handleChange} name="Phyton" />}
+          label="Phyton"
+        />
+        <FormControlLabel
+          control={<Checkbox checked={JavaScript} onChange={handleChange} name="JavaScript" />}
+          label="JavaScript"
+        />
+        <FormControlLabel
+          control={<Checkbox checked={C} onChange={handleChange} name="C" />}
+          label="C"
+        />
+        <FormControlLabel
+          control={<Checkbox checked={Ruby} onChange={handleChange} name="Ruby" />}
+          label="Ruby"
+        />
+        <FormControlLabel
+          control={<Checkbox checked={Swift} onChange={handleChange} name="Swift" />}
+          label="Swift"
+        />
+        {alert == true && <Alert severity="error">Необходимо выбрать хотя бы один пункт!</Alert>}
         <SubmitButton>Следующий шаг</SubmitButton>
       </form>
     </Container>

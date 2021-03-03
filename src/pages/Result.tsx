@@ -72,22 +72,26 @@ export const Result = () => {
             { info.lastName }
             </Typography>
           </div>
-          <div className={ styles.content }>
-            <Typography variant="h5" component="span" className={ styles.title }>
-              Город:
-            </Typography>
-            <Typography className={ styles.pos } color="textSecondary" component="span">
-              { info.city }
-            </Typography>
-          </div>
-          <div className={ styles.content }>
-            <Typography variant="h5" component="span" className={ styles.title }>
-              Возраст:
-            </Typography>
-            <Typography className={ styles.pos } color="textSecondary" component="span">
-              { questionnaire.age }
-            </Typography>
-          </div>
+          { info.city !== '' && 
+            <div className={ styles.content }>
+              <Typography variant="h5" component="span" className={ styles.title }>
+                Город:
+              </Typography>
+              <Typography className={ styles.pos } color="textSecondary" component="span">
+                { info.city }
+              </Typography>
+            </div>
+          }
+          { questionnaire.age !== '' &&
+            <div className={ styles.content }>
+              <Typography variant="h5" component="span" className={ styles.title }>
+                Возраст:
+              </Typography>
+              <Typography className={ styles.pos } color="textSecondary" component="span">
+                { questionnaire.age }
+              </Typography>
+            </div>
+          }
           <div className={ styles.content }>
             <Typography variant="h5" component="span">
               Языки програмирования
