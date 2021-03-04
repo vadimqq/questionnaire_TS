@@ -5,7 +5,7 @@ import { Step2 } from './pages/Step2'
 import { Step3 } from './pages/Step3'
 import { Result } from './pages/Result'
 
-function App() {
+const App: React.FC = () => {
   return (
     <>
       <Header />

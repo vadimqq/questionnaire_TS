@@ -12,7 +12,7 @@ import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
 import InputLabel from '@material-ui/core/InputLabel'
 import { SubmitButton } from '../components/Buttton'
-import TextField from '@material-ui/core/TextField'
+import InputText from '../components/InputText'
 
 import { setInfo } from '../store/infoReducer'
 
@@ -74,23 +74,15 @@ export const Step1 = () => {
         noValidate
         className={ styles.form }
       >
-        <TextField
-          variant="outlined"
-          margin="normal"
-          fullWidth
-          inputRef={ register }
-          type="text"
+        <InputText
+          ref={ register }
           label="Имя"
           name="firstName"
           error={ !!errors.firstName }
           helperText={ errors?.firstName?.message }
         />
-        <TextField
-          variant="outlined"
-          margin="normal"
-          fullWidth
-          inputRef={ register }
-          type="text"
+        <InputText
+          ref={ register }
           label="Фамилия"
           name="lastName"
           error={ !!errors.lastName }
