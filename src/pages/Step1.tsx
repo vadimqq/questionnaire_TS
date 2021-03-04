@@ -55,6 +55,15 @@ export const Step1 = () => {
     mode: 'onBlur',
     resolver: yupResolver(schema)
   })
+  const [cities, setCities] = useState([
+    'Ульяновск',
+    'Москва',
+    'Самaра',
+    'Пермь',
+    'Казань',
+    'Владивосток',
+    'Санкт-Петербург'
+  ])
 
   const onSubmit = (data: InfoData) => {
     dispatch(setInfo(data))
@@ -93,6 +102,7 @@ export const Step1 = () => {
           <SelectInput
               ref={ register }
               name="city"
+              cities={cities}
           />
         </FormControl>
         <SubmitButton>Следующий шаг</SubmitButton>

@@ -3,6 +3,7 @@ import Select from '@material-ui/core/Select'
 
 interface SelectProps {
   name : string
+  cities: string[]
 }
 
 const SelectInput = React.forwardRef<HTMLInputElement,SelectProps>((props, ref) => {
@@ -10,16 +11,14 @@ const SelectInput = React.forwardRef<HTMLInputElement,SelectProps>((props, ref) 
 		<Select
       native
       inputRef= { ref }
-      { ...props }
+      name={ props.name }
     >
       <option aria-label="None" value="" />
-      <option value="Ульяновск">Ульяновск</option>
-      <option value="Москва">Москва</option>
-      <option value="Самра">Самара</option>
-      <option value="Пермь">Пермь</option>
-      <option value="Казань">Казань</option>
-      <option value="Владивосток">Владивосток</option>
-      <option value="Санкт-Петербург">Санкт-Петербург</option>
+      { props.cities.map((name, index) => {
+        return (
+          <option value={ name } key={ index }>{ name }</option>
+        )
+      }) }
     </Select>
 	)
 })
