@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import * as yup from 'yup'
 import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
@@ -9,10 +9,10 @@ import { makeStyles } from '@material-ui/core/styles'
 import { Container } from '@material-ui/core'
 import Typography from '@material-ui/core/Typography'
 import FormControl from '@material-ui/core/FormControl'
-import Select from '@material-ui/core/Select'
 import InputLabel from '@material-ui/core/InputLabel'
 import { SubmitButton } from '../components/Buttton'
 import InputText from '../components/InputText'
+import SelectInput from '../components/SelectInput'
 
 import { setInfo } from '../store/infoReducer'
 
@@ -90,24 +90,10 @@ export const Step1 = () => {
         />
         <FormControl margin="normal">
           <InputLabel htmlFor="age-native-simple">Город</InputLabel>
-          <Select
-            native
-            name="city"
-            inputRef= { register }
-            inputProps={{
-              name: 'city',
-              id: 'age-native-simple',
-            }}
-          >
-            <option aria-label="None" value="" />
-            <option value="Ульяновск">Ульяновск</option>
-            <option value="Москва">Москва</option>
-            <option value="Самра">Самара</option>
-            <option value="Москва">Пермь</option>
-            <option value="Самра">Казань</option>
-            <option value="Москва">Владивосток</option>
-            <option value="Самра">Санкт-Петербург</option>
-          </Select>
+          <SelectInput
+              ref={ register }
+              name="city"
+          />
         </FormControl>
         <SubmitButton>Следующий шаг</SubmitButton>
       </form>
