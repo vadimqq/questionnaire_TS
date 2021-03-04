@@ -4,8 +4,8 @@ import TextField from '@material-ui/core/TextField'
 interface InputProps {
   label: string
   name: string
-  error: any
-  helperText: any
+  error: boolean
+  helperText: string
 }
 
 const InputText = React.forwardRef<HTMLInputElement,InputProps>((props, ref) => {
